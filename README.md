@@ -23,7 +23,12 @@ According to the ```period.py```, <img src="https://latex.codecogs.com/gif.latex
 <img src="https://latex.codecogs.com/gif.latex?a^4&space;mod&space;N&space;=&space;9" title="a^4 mod N = 9" />,
 <img src="https://latex.codecogs.com/gif.latex?a^5&space;mod&space;N&space;=&space;3" title="a^5 mod N = 3" />)  
 
- <img src="https://latex.codecogs.com/gif.latex?r" title="r" /> has 6(2^3) gates, and the maximum value of the reminder is 13 , which is less than 16(2^4), so let's make an oracle which shows r(q1) and reminder(q2).  This is the oracle that I created.  
+ <img src="https://latex.codecogs.com/gif.latex?r" title="r" /> has 6(2^3) gates, and the maximum value of the reminder is 13 , which is less than 16(2^4), so let's make an oracle which shows r(q1) and reminder(q2).  This is the oracle that I created.
+ 
+ In order to get <img src="https://latex.codecogs.com/gif.latex?|0\rangle" title="|0\rangle" /> to <img src="https://latex.codecogs.com/gif.latex?|6\rangle" title="|6\rangle" />, I put hadamard gates on the all the qubits.
+ 
+ Then, put the oracle that I mentioned. You can see the same codes down below in the `Factoring.py`  
+ 
 ```   
 for i in range(nx):
 	qc.h(q1[i])
@@ -37,10 +42,16 @@ qc.ccx(q1[0],q1[2],q2[1])
 qc.ccx(q1[0],q1[2],q2[2])
 qc.ccx(q1[1],q1[2],q2[2])  
 ```  
+Then, if you apply the inverse quantum fourier transform, you would get all the reminders(from the one when <img src="https://latex.codecogs.com/gif.latex?r=0" title="r=0" /> to <img src="https://latex.codecogs.com/gif.latex?r=5" title="r=5" />.  If you don't know about the inverse quantum fourier transform, please refer to my Quantum Fourier Transform repository.
+
 Here is the result on the QASM simulator.  
 ![shor_oracle_sim](https://user-images.githubusercontent.com/45162150/50736795-118b7780-1205-11e9-8d92-f19d84ee9c3e.png)
 
 And, this is the result on ibmq_20_tokyo.  
+![shor_oracle_tokyo](https://user-images.githubusercontent.com/45162150/50736806-397adb00-1205-11e9-9582-9fc0197e901b.png)  
 
+So, we got 1,3,5,7,9,11,13.  In this case, 7 = 1 + 6, 9 = 3 + 6, 11 = 5 + 6, 13 = 1 + 6 * 2. So, the period is 6, which is the same value as what we got from the `period.py`.    
+  
+ Therefore, <img src="https://latex.codecogs.com/gif.latex?5^{6/2}&space;-&space;1&space;=&space;124" title="5^{6/2} - 1 = 124" /> and <img src="https://latex.codecogs.com/gif.latex?gcd(14,124)&space;=&space;2" title="gcd(14,124) = 2" />, which is a prime number.  Then <img src="https://latex.codecogs.com/gif.latex?14&space;/&space;2&space;=&space;7" title="14 / 2 = 7" />,which is also a prime number.  Therefore, <img src="https://latex.codecogs.com/gif.latex?14&space;=&space;2&space;\bullet&space;7" title="14 = 2 \bullet 7" />
 
   
