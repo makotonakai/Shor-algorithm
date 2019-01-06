@@ -38,5 +38,9 @@ qc.ccx(q1[0],q1[2],q2[2])
 qc.ccx(q1[1],q1[2],q2[2])  
 ```  
 Here is the result on the QASM simulator.  
+![shor_oracle_sim](https://user-images.githubusercontent.com/45162150/50736795-118b7780-1205-11e9-8d92-f19d84ee9c3e.png)
+
+And, this is the result on ibmq_20_tokyo.  
+
 
   
