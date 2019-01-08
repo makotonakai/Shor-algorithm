@@ -1,17 +1,14 @@
 
 # coding: utf-8
 
-# In[ ]:
-
-
 from qiskit import IBMQ, QuantumCircuit, ClassicalRegister, QuantumRegister
 from qiskit import execute, Aer
 from qiskit.qasm import pi
 from qiskit.tools.visualization import plot_histogram, circuit_drawer
 import numpy as np
 
-APItoken = "fa84f6833961480e40f615777a497a80f45e9fbf83266bf7431ef468a80d425fbd31080f4483dec301fc05ffe67c178c9b52c4b90bb37b20f10ca68cda09386f"
-url = "https://q-console-api.mybluemix.net/api/Hubs/ibm-q-keio/Groups/keio-internal/Projects/qip-students"
+APItoken = "Replace me"
+url = "Replace me"
 IBMQ.enable_account(APItoken, url)
 
 IBMQ.backends()
@@ -49,12 +46,7 @@ backend_sim = IBMQ.get_backend(backends[0])
 #{'1001': 517, '0101': 500, '0001': 487, '0011': 1008, '1101': 509, '1011': 1075}
 result = execute(qc, backend_sim, shots=4096).result()
 #circuit_drawer(qc).show()
-plot_histogram(result.get_counts(qc))
+
 print(result.get_counts(qc))
-
-
-# In[2]:
-
-
 plot_histogram(result.get_counts(qc))
 
